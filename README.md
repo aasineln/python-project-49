@@ -6,6 +6,40 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/aasineln/python-project-49/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/aasineln/python-project-49/actions)
 
+
+### Требования
+    - Python 3.8 или выше
+    - Менеджер пакетов uv
+
+Установка
+    - Клонируйте репозиторий:
+
+```bash
+git clone https://github.com/aasineln/python-project-49.git
+cd <project-directory>
+```
+
+### Установите зависимости с помощью uv:
+```bash
+make install
+```
+
+### Доступные команды Make:
+`make install` - Установка зависимостей проекта  
+`make build` - Сборка дистрибутивов пакета  
+`make package-install` - Установка собранного пакета глобально  
+`make lint`	- Проверка кода линтером Ruff  
+`make lint-fix` - Автоматическое исправление ошибок линтера  
+`make black` - Форматирование кода с помощью Black  
+
+### Запуск игры в терминале: 
+```
+brain-games  # игра "Приветствие игрока"
+brain-even  # игра "Четность числа"
+brain-calc  # игра "Математические операции"
+brain-gcd  # игра "НОД" наибольший общий делитель
+```
+
 ### brain-even
 [![asciicast](https://asciinema.org/a/x57o5xq1LppCFT8n.svg)](https://asciinema.org/a/x57o5xq1LppCFT8n) 
 
