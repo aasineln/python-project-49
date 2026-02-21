@@ -62,4 +62,4 @@ class Game(ABC):
         print(f"Congratulations, {self.player_name}!")
 
     def _loose_output(self) -> None:
-        print(f"Let's try again, {self.player_name}")
+        print(f"Let's try again, {self.player_name}!")
