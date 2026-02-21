@@ -1,13 +1,50 @@
 import random
+from abc import ABC, abstractmethod
 
 import prompt
 
 
-class Game:
+class Game(ABC):
     def __init__(self):
         self.player_name = None
+        self.questions_count = 3
 
     def start(self):
+        self._greeting()
+        self._get_player_name()
+
+        if self._play_rounds():
+            self._congratulate()
+        else:
+            self._loose_output()
+
+    def _play_rounds(self):
+        self._get_game_header()
+        for round_num in range(self.questions_count):
+            question_data = self._generate_question()
+            print(f"Question: {question_data['question']}")
+
+            user_answer = self._get_answer()
+
+            if not self._check_answer(question_data, user_answer):
+                print(
+                    f"'{user_answer}' is wrong answer ;(. "
+                    f"Correct answer was '{question_data['correct_answer']}'."
+                )
+                return False
+            print("Correct!")
+        return True
+
+    @abstractmethod
+    def _get_game_header(self):
+        pass
+
+    @abstractmethod
+    def _generate_question(self):
+        pass
+
+    @abstractmethod
+    def _check_answer(self, question_data, answer):
         pass
 
     def _greeting(self) -> None:
@@ -18,79 +55,76 @@ class Game:
             self.player_name = prompt.string("May I have your name? ")
         print(f"Hello, {self.player_name}!")
 
+    @staticmethod
+    def _get_answer() -> str:
+        return prompt.string("Your answer: ")
+
+    def _congratulate(self) -> None:
+        print(f"Congratulations, {self.player_name}!")
+
+    def _loose_output(self) -> None:
+        print(f"Try again, {self.player_name}")
+
 
 class BrainGames(Game):
     def start(self):
         self._greeting()
         self._get_player_name()
 
+    def _get_game_header(self):
+        pass
+
+    def _generate_question(self):
+        pass
+
+    def _check_answer(self, question_data, answer):
+        pass
+
 
 class GameBrainEven(Game):
-    def start(self):
-        self._greeting()
-        self._get_player_name()
-        self._start_even_numbers()
+    def _get_game_header(self):
+        print("Answer \"yes\" if the number is even, otherwise answer \"no\".")
 
-    def _start_even_numbers(self) -> None:
-        print("Answer \"yes\" if the number is even, otherwise answer \"no\"")
-        all_answers_correct = True
-        for _ in range(3):
-            random_number = random.randint(0, 100)
-            print(f"Question: {random_number}")
+    def _generate_question(self) -> dict:
+        number = random.randint(0, 100)
+        correct_answer = "yes" if self._is_even(number) else "no"
+        return {
+            "question": str(number),
+            "correct_answer": correct_answer
+        }
 
-            answer = prompt.string("Your answer: ")
-            if self.is_even(random_number) and answer.lower() == "yes":
-                result = "Correct!"
-            elif not self.is_even(random_number) and answer.lower() == "no":
-                result = "Correct!"
-            else:
-                result = "Incorrect!"
-                all_answers_correct = False
-            print(result)
-
-        if all_answers_correct:
-            print(f"Congratulations, {self.player_name}!")
-        else:
-            print(f"Try again, {self.player_name}")
+    def _check_answer(self, question_data, answer):
+        return question_data["correct_answer"] == answer.lower()
 
     @staticmethod
-    def is_even(number: int) -> bool:
+    def _is_even(number: int) -> bool:
         if number % 2 == 0:
             return True
         return False
 
 
 class GameBrainCalc(Game):
-    def start(self):
-        self._greeting()
-        self._get_player_name()
-        self._start_game_brain_calc()
+    OPERATIONS = {
+        '+': lambda x, y: x + y,
+        '-': lambda x, y: x - y,
+        '*': lambda x, y: x * y
+    }
 
-    def _start_game_brain_calc(self) -> None:
+    def _get_game_header(self):
         print("What is the result of the expression?")
-        for _ in range(3):
-            num_1 = self._get_random_number()
-            num_2 = self._get_random_number()
-            math_sign = self._get_random_math_sign()
 
-            print(f"Question: {num_1} {math_sign} {num_2}")
-            player_answer = self.get_player_answer()
-            expected_result = self._get_expected_result(
-                num_1=num_1,
-                num_2=num_2,
-                math_sign=math_sign,
-            )
+    def _generate_question(self) -> dict:
+        num_1 = self._get_random_number()
+        num_2 = self._get_random_number()
+        math_sign = random.choice(list(self.OPERATIONS))
 
-            if player_answer == expected_result:
-                print("Correct!")
-            else:
-                print(
-                    f"'{player_answer}' is wrong answer ;(. "
-                    f"Correct answer was '{expected_result}'."
-                )
-                print(f"Let's try again, {self.player_name}!")
-                break
-            print(f"Congratulations, {self.player_name}!")
+        return {
+            "question": f"Question: {num_1} {math_sign} {num_2}",
+            "correct_answer": str(self.OPERATIONS[math_sign](num_1, num_2))
+        }
+
+    def _check_answer(self, question_data, answer):
+        return question_data["correct_answer"] == answer.lower()
 
     def _get_random_number(self) -> int:
         return random.randint(0, 100)
@@ -98,24 +132,11 @@ class GameBrainCalc(Game):
     def _get_random_math_sign(self):
         return random.choice(["+", "-", "*"])
 
-    def _get_expected_result(
-            self, num_1: int, num_2: int, math_sign: str
-    ) -> int | None:
-        result = None
-        match math_sign:
-            case "+":
-                result = num_1 + num_2
-            case "-":
-                result = num_1 - num_2
-            case "*":
-                result = num_1 * num_2
-        return result
-
     def get_player_answer(self) -> int:
         answer = None
         while answer is None:
             try:
-                answer = int(prompt.string("Your answer: "))
+                answer = int(self._get_answer())
             except (TypeError, ValueError):
                 pass
         return answer
