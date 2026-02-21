@@ -37,9 +37,10 @@ brain-games  # игра "Приветствие игрока"
 brain-even  # игра "Четность числа"
 brain-calc  # игра "Математические операции"
 brain-gcd  # игра "НОД" наибольший общий делитель
+brain-progression  # игра "Прогрессия"
+brain-prime  # игра "Простое число"
 ```
 
-### brain-even
-[![asciicast](https://asciinema.org/a/x57o5xq1LppCFT8n.svg)](https://asciinema.org/a/x57o5xq1LppCFT8n) 
-
+### brain-games demo
+[![asciicast](https://asciinema.org/a/KmBzdRWcPz4tbM6u.svg)](https://asciinema.org/a/KmBzdRWcPz4tbM6u)
 
