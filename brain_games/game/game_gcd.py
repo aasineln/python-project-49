@@ -4,8 +4,8 @@ import random
 from brain_games.game.game_abc import Game
 
 
-class GCDGame(Game):
-    def _get_game_header(self):
+class GameGCD(Game):
+    def _get_game_header(self) -> None:
         print("Find the greatest common divisor of given numbers.")
 
     def _generate_question(self) -> dict:
@@ -21,7 +21,7 @@ class GCDGame(Game):
     def get_correct_answer(num_1: int, num_2: int) -> int:
         return math.gcd(num_1, num_2)
 
-    def _check_answer(self, question_data, answer):
+    def _check_answer(self, question_data: dict, answer: str) -> bool:
         return question_data["correct_answer"] == answer.lower()
 
     def _get_random_number(self) -> int:

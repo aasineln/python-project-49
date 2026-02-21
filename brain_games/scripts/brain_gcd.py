@@ -1,8 +1,8 @@
-from brain_games.game.game_gcd import GCDGame
+from brain_games.game.game_gcd import GameGCD
 
 
 def main() -> None:
-    game = GCDGame()
+    game = GameGCD()
     game.start()
 
 

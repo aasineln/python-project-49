@@ -10,7 +10,7 @@ class GameBrainCalc(Game):
         "*": lambda x, y: x * y,
     }
 
-    def _get_game_header(self):
+    def _get_game_header(self) -> None:
         print("What is the result of the expression?")
 
     def _generate_question(self) -> dict:
@@ -23,11 +23,11 @@ class GameBrainCalc(Game):
             "correct_answer": str(self.OPERATIONS[math_sign](num_1, num_2)),
         }
 
-    def _check_answer(self, question_data, answer):
+    def _check_answer(self, question_data: dict, answer: str) -> bool:
         return question_data["correct_answer"] == answer.lower()
 
     def _get_random_number(self) -> int:
         return random.randint(0, 100)
 
-    def _get_random_math_sign(self):
+    def _get_random_math_sign(self) -> str:
         return random.choice(["+", "-", "*"])
