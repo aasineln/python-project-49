@@ -1,5 +1,5 @@
 ### Tests and linter status:   
-[![Actions Status](https://github.com/aasineln/python-project-49/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/aasineln/python-project-49/actions)  [![QA SonarQube](https://sonarcloud.io/api/project_badges/measure?project=aasineln_python-project-49&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=aasineln_python-project-49&branch=main)
+[![Actions Status](https://github.com/aasineln/brain-games/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/aasineln/brain-games/actions)  [![QA SonarQube](https://sonarcloud.io/api/project_badges/measure?project=aasineln-brain-games&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=aasineln_aasineln-brain-games&branch=main)
 
 ## Brain Games
 Brain Games is a collection of console mini-games designed to train logical thinking and test basic math skills. The project consists of five engaging mathematical challenges, each launched with a separate command.
@@ -22,8 +22,8 @@ All games follow the same principle: the player is asked three questions in sequ
 
 ### ⚙️ Installation
 ```bash
-git clone https://github.com/aasineln/python-project-49.git
-cd python-project-49
+git clone https://github.com/aasineln/brain-games.git
+cd brain-games
 make build
 make package-install
 ```
