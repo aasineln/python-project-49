@@ -54,5 +54,4 @@ make black — format code with Black
 ```
 
 ### 🎥 Demo
-[![asciicast](https://asciinema.org/a/KmBzdRWcPz4tbM6u.svg)](https://asciinema.org/a/KmBzdRWcPz4tbM6u)
-
+[![asciicast](https://asciinema.org/a/875792.svg)](https://asciinema.org/a/875792)
